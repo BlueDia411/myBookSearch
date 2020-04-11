@@ -14,7 +14,7 @@ public class NetworkUntils {
     private static final String LOG_TAG = NetworkUntils.class.getSimpleName();
     private static final String BOOK_BASE_URL = "https://www.googleapis.com/books/v1/volumes?";
     private static final String QUERY_PARAM = "q";
-    private static final String MAX_RESULT = "maxResult";
+    private static final String MAX_RESULTS = "maxResults";
     private static final String PRINT_TYPE = "printType";
 
     static String getBookInfo(String queryString){
@@ -22,8 +22,8 @@ public class NetworkUntils {
         BufferedReader reader = null;
         String bookJSONString = null;
         try{
-            Uri builtUri = Uri.parse(BOOK_BASE_URL).buildUpon().appendQueryParameter(QUERY_PARAM, queryString).appendQueryParameter(MAX_RESULT, "10").appendQueryParameter(PRINT_TYPE, "books").build();
-
+            //Uri builtUri = Uri.parse(BOOK_BASE_URL).buildUpon().appendQueryParameter(QUERY_PARAM, queryString).appendQueryParameter(MAX_RESULT, "10").appendQueryParameter(PRINT_TYPE, "books").build();
+            Uri builtUri = Uri.parse(BOOK_BASE_URL).buildUpon().appendQueryParameter(QUERY_PARAM, queryString).appendQueryParameter(MAX_RESULTS, "10").appendQueryParameter(PRINT_TYPE, "books").build();
             URL requestURL = new URL(builtUri.toString());
             urlConnection = (HttpURLConnection) requestURL.openConnection();
             urlConnection.setRequestMethod("GET");

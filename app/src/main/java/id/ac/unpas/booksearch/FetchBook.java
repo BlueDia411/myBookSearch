@@ -22,13 +22,13 @@ public class FetchBook extends AsyncTask<String, Void, String> {
         super.onPostExecute(s);
         try {
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray jsonArray = jsonObject.getJSONArray("items");
+            JSONArray itemsArray = jsonObject.getJSONArray("items");
 
             for (int i = 0; i < itemsArray.length(); i++) {
                 JSONObject book = itemsArray.getJSONObject(i);
                 String title = null;
                 String authors = null;
-                JSONObject volumeInfo = book.getJSONObject("vomuleInfo");
+                JSONObject volumeInfo = book.getJSONObject("volumeInfo");
 
                 try{
                     title = volumeInfo.getString("title");
@@ -36,13 +36,14 @@ public class FetchBook extends AsyncTask<String, Void, String> {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
                 if (title != null && authors != null) {
                     mTitleText.setText(title);
                     mAuthorText.setText(authors);
                     return;
                 }
             }
-            mTitleText.setText("No Reslut Found");
+            mTitleText.setText("No Result Found");
             mAuthorText.setText("");
         }catch (Exception e){
             mTitleText.setText("No Result Found");
